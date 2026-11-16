@@ -21,6 +21,6 @@ pub extern "C" fn _start() -> ! {
     gdt::init();
     interrupts::init_idt();
     x86_64::instructions::interrupts::int3();
-    panic!("Ca fonctionne");
+    println!("Ca fonctionne");
     loop {}
 }
