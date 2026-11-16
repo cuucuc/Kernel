@@ -1,6 +1,8 @@
 #![no_std]
 #![no_main]
+#![feature(abi_x86_interrupt)]
 
+mod interrupts;
 mod uart;
 mod vga;
 
@@ -15,6 +17,8 @@ fn panic(info: &PanicInfo) -> ! {
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
     println!("Test{}", "!");
+    interrupts::init_idt();
+    x86_64::instructions::interrupts::int3();
     panic!("C'est kc");
     loop {}
 }
