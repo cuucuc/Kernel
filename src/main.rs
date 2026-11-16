@@ -24,3 +24,9 @@ pub extern "C" fn _start() -> ! {
     println!("Ca fonctionne");
     loop {}
 }
+
+#[allow(unconditional_recursion)]
+fn stack_overflow() {
+    stack_overflow();
+    core::hint::black_box(()); // empêche le compilateur de transformer la récursion en boucle
+}
